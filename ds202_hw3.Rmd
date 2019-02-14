@@ -1,0 +1,10 @@
+---
+title: "DS202 Hw3"
+author: "Evan Mills; ejmills"
+date: "February 14, 2019"
+output: html_document
+---
+
+```{r}
+data(tips, package = "reshape2")
+```
