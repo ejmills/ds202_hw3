@@ -6,5 +6,68 @@ output: html_document
 ---
 
 ```{r}
+library("ggplot2")
 data(tips, package = "reshape2")
+head(tips)
+print("hello")
 ```
+
+1.)
+```{r}
+numParty <- nrow(tips)
+cat("Number of Parties:", numParty)
+```
+
+2.)
+```{r}
+str(tips)
+```
+
+3.)
+```{r}
+tips$day <- factor(tips$day, levels = c("Thur", "Fri", "Sat", "Sun"))
+day <- tips$day
+str(day)
+```
+
+4.)
+```{r}
+female5 <- tips[tips$sex == "Female" & tips$size >= 5,]
+female5
+```
+
+5.)
+
+As you can see from the graph below the tip usually goes up as the total bill does, however there is not a strong relation ship between the total bill and the tip given.
+```{r}
+ggplot(data = tips, aes(x = total_bill, y = tip)) + geom_point()
+```
+
+6.)
+```{r}
+tips$tiprate <- tips$tip / tips$size
+str(tips)
+signif(mean(tips$tiprate), digits = 3)
+```
+
+As you can see from above the average tiprate is $1.21
+
+7.)
+```{r}
+tips$time <- factor(tips$time, levels = c("Lunch", "Dinner"))
+ggplot(tips, aes(x = time, y = tiprate)) + geom_boxplot()
+```
+
+8.)
+```{r}
+ggplot(data = tips, aes(x = total_bill, y = tip)) + facet_wrap(tips$sex~tips$smoker) + geom_point()
+```
+
+As you can see from the chart above there is no correlation between smoking and the amount tipped for women, bu the men who did not smoke tended to tip higher, however the males tend to tip more than the females over all.
+
+9.)
+```{r}
+ggplot(tips, aes(x = day)) + facet_wrap(tips$sex) + geom_bar()
+```
+
+The number of people who go out depends on the oposite sex, however more men tend to go out than women.
